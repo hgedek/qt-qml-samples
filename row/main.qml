@@ -35,8 +35,6 @@ Window {
             color: "red"
             height: parent.height
             width:100
-
-            Behavior on color { NumberAnimation {}}
         }
 
         Rectangle {
