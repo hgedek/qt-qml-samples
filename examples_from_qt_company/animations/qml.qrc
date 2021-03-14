@@ -1,6 +1,5 @@
 <RCC>
     <qresource prefix="/">
-        <file>main.qml</file>
         <file>animators.qml</file>
         <file>images/face-smile.png</file>
         <file>images/moon.png</file>
@@ -10,5 +9,9 @@
         <file>color_animation.qml</file>
         <file>property_animation.qml</file>
         <file>spring_animation.qml</file>
+        <file>path_animation.qml</file>
+        <file>path_interpolator.qml</file>
+        <file>states.qml</file>
+        <file>transitions.qml</file>
     </qresource>
 </RCC>
