@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>animators.qml</file>
+        <file>images/face-smile.png</file>
+        <file>images/moon.png</file>
+        <file>images/shadow.png</file>
+        <file>images/star.png</file>
+        <file>images/sun.png</file>
+        <file>color_animation.qml</file>
+        <file>property_animation.qml</file>
+    </qresource>
+</RCC>
