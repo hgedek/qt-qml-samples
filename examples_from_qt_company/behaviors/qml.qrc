@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>focus_rect.qml</file>
+        <file>wigglytext.qml</file>
+        <file>tvtennis.qml</file>
+    </qresource>
+</RCC>

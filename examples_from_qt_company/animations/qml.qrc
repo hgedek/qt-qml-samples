@@ -9,5 +9,6 @@
         <file>images/sun.png</file>
         <file>color_animation.qml</file>
         <file>property_animation.qml</file>
+        <file>spring_animation.qml</file>
     </qresource>
 </RCC>
