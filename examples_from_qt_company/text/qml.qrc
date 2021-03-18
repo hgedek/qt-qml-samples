@@ -1,0 +1,9 @@
+<RCC>
+    <qresource prefix="/">
+        <file>styled_text.qml</file>
+        <file>fonts.qml</file>
+        <file>banner.qml</file>
+        <file>hellotext.qml</file>
+        <file>content/fonts/tarzeau_ocr_a.ttf</file>
+    </qresource>
+</RCC>
