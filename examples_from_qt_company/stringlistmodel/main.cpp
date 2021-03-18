@@ -1,5 +1,7 @@
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
+#include <QQmlContext>
+#include <QQuickView>
 
 int main(int argc, char *argv[])
 {
@@ -8,15 +10,12 @@ int main(int argc, char *argv[])
 #endif
 
   QGuiApplication app(argc, argv);
-
-  QQmlApplicationEngine engine;
-  const QUrl url(QStringLiteral("qrc:/main.qml"));
-  QObject::connect(&engine, &QQmlApplicationEngine::objectCreated,
-                   &app, [url](QObject *obj, const QUrl &objUrl) {
-    if (!obj && url == objUrl)
-      QCoreApplication::exit(-1);
-  }, Qt::QueuedConnection);
-  engine.load(url);
+  QStringList list;
+  list << "Item1" << "Item2" << "Item3";
+  QQuickView view;
+  view.setInitialProperties({{"model", QVariant::fromValue(list)}});
+  view.setSource({"qrc:main.qml"});
+  view.show();
 
   return app.exec();
 }
