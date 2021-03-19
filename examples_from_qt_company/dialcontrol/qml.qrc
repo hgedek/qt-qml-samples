@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Dial.qml</file>
+        <file>QuitButton.qml</file>
+        <file>images/background.png</file>
+        <file>images/needle.png</file>
+        <file>images/needle_shadow.png</file>
+        <file>images/overlay.png</file>
+        <file>images/quit.png</file>
+        <file>DialControl.qml</file>
+    </qresource>
+</RCC>
