@@ -1,0 +1,4 @@
+Only changes are in CMake file. With Qt6 registrationg of c++ quick items methods changed so 
+We can use qt6... methods to register from here.
+
+QML_ELEMENT...dont forget :d
