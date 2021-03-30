@@ -1,1 +1,2 @@
-# qt-qml-samples
+# qml samples
+playground for qt & qml
