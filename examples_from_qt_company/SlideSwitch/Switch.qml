@@ -1,21 +1,19 @@
-import QtQuick 2.0
+import QtQuick
 
 Item {
     id: toggleSwitch
+    width: background.width
+    height: background.height
 
     property bool on: false
 
     function toggle() {
-        toggleSwitch.state = toggleSwitch.state == "on" ? "off" : "on"
+        toggleSwitch.state = on == true ? "off" : "on"
     }
 
-    function releaseSwitch() {
-        if (knob.x == 1) {
-            if (toggleSwitch.state == "off") return;
-        }
-
-        if (knob.x == 70)
-            if (toggleSwitch.state == "on") return;
+    function release() {
+        if (knob.x == 0 && toggleSwitch.on == false) return;
+        if (knob.x == 80 && toggleSwitch.on == true) return;
 
         toggle();
     }
@@ -23,19 +21,30 @@ Item {
     Image {
         id: background
         source: "images/background.png"
-        MouseArea { anchors.fill: parent; onClicked: toggle() }
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: toggle()
+        }
     }
 
     Image {
         id: knob
-        x: 1; y: 1
         source: "images/knob.png"
+        y: 5
 
         MouseArea {
             anchors.fill: parent
-            drag.target: knob; drag.axis: Drag.XAxis; drag.minimumX: 1; drag.maximumX: 70
-            onClicked: toggle()
-            onReleased: releaseSwitch()
+            drag {
+                target: knob
+                axis: Drag.XAxis
+                minimumX: 0
+                maximumX: 80
+            }
+
+            onReleased: {
+                release()
+            }
         }
     }
 
@@ -44,7 +53,7 @@ Item {
             name: "on"
             PropertyChanges {
                 target: knob
-                x: 70
+
             }
             PropertyChanges {
                 target: toggleSwitch
@@ -55,9 +64,8 @@ Item {
             name: "off"
             PropertyChanges {
                 target: knob
-                x: 1
+                x: 0
             }
-
             PropertyChanges {
                 target: toggleSwitch
                 on: false
@@ -67,9 +75,11 @@ Item {
 
     transitions: Transition {
         NumberAnimation {
-            easing.type: Easing.InOutExpo
+            target: knob
             properties: "x"
             duration: 200
+            easing.type: Easing.InOutQuad
         }
     }
 }
+
