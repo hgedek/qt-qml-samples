@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.14)
 
-project(Spinner LANGUAGES CXX)
+project(spinner LANGUAGES CXX)
 
 set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
@@ -33,22 +33,22 @@ set(PROJECT_SOURCES
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
-    qt_add_executable(Spinner
+    qt_add_executable(spinner
         ${PROJECT_SOURCES}
     )
 else()
     if(ANDROID)
-        add_library(Spinner SHARED
+        add_library(spinner SHARED
             ${PROJECT_SOURCES}
         )
     else()
-        add_executable(Spinner
+        add_executable(spinner
           ${PROJECT_SOURCES}
         )
     endif()
 endif()
 
-target_compile_definitions(Spinner
+target_compile_definitions(spinner
   PRIVATE $<$<OR:$<CONFIG:Debug>,$<CONFIG:RelWithDebInfo>>:QT_QML_DEBUG>)
-target_link_libraries(Spinner
+target_link_libraries(spinner
   PRIVATE Qt${QT_VERSION_MAJOR}::Core Qt${QT_VERSION_MAJOR}::Quick)
