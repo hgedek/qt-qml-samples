@@ -3,5 +3,6 @@
         <file>main.qml</file>
         <file>PetsModel.qml</file>
         <file>PetsDynamic.qml</file>
+        <file>ListSelector.qml</file>
     </qresource>
 </RCC>
