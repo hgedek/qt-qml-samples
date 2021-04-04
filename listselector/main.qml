@@ -101,13 +101,6 @@ Window {
                     onClicked: view.currentIndex = index
                 }
             }
-
-            highlight: Rectangle {
-                height: 100
-                width: 100
-                color: "black"
-                radius: 2
-            }
         }
     }
 }
