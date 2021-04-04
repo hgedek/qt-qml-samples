@@ -1,4 +1,5 @@
 import QtQuick 2.0
+import QtQml.Models 2.1
 
 Rectangle {
     id: root
@@ -6,69 +7,90 @@ Rectangle {
     Component {
         id : dragDelegate
 
-        Rectangle {
-            id: content
+        MouseArea {
+            id: dragArea
+
+            property bool held: false
 
             anchors { left: parent.left; right: parent.right }
+            height: content.height
 
-            width: parent.width
-            height: column.implicitHeight + 10
+            drag.target: held ? content : undefined
+            drag.axis: Drag.YAxis
 
-            border.width: 1
-            border.color: "lightsteelblue"
+            onPressAndHold: held = true
+            onReleased: held = false
 
-            color: dragArea.held ? "lightsteelblue" : "white"
-            Behavior on color {
-                ColorAnimation {
-                    duration: 200
+            Rectangle {
+                id: content
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                    verticalCenter: parent.verticalCenter
                 }
-            }
 
-            states: State {
-                when: dragArea.held
+                width: dragArea.width
+                height: column.implicitHeight + 5
 
-                ParentChange { target: content; parent: root }
-                AnchorChanges {
-                    target: content
-                    anchors {
-                        horizontalCenter: undefined
-                        verticalCenter: undefined
+                border.width: 1
+                border.color: "lightsteelblue"
+
+                color: dragArea.held ? "lightsteelblue" : "white"
+                Behavior on color { ColorAnimation { duration: 200 }}
+
+                radius: 2
+
+                Drag.active: dragArea.held
+                Drag.source: dragArea
+                Drag.hotSpot.x: width/2
+                Drag.hotSpot.y: height/2
+
+                states: State {
+                    when: dragArea.held
+
+                    ParentChange { target: content; parent: root }
+                    AnchorChanges {
+                        target: content
+                        anchors { verticalCenter: undefined; horizontalCenter: undefined }
                     }
                 }
+
+                Column {
+                    id: column
+                    Text { text: "Name: " + name }
+                    Text { text: "Type: " + type }
+                    Text { text: "Size: " + size }
+                    Text { text: "Age: " + age }
+                }
             }
 
-            Column {
-                id: column
-                anchors.fill: parent
-                anchors.margins: 5
+            DropArea {
+                anchors { fill: parent; margins: 10 }
+                onEntered: (drag) => {
+                   console.log("from:" + drag.source.DelegateModel)
+                   console.log("to:" + dragArea.DelegateModel)
 
-                Text { text: "Name: " + name }
-                Text { text: "Age: " + age }
-                Text { text: "Type: " + type }
-                Text { text: "Size: " + size }
-            }
+                   visualModel.items.move(
+                       drag.source.DelegateModel.itemsIndex,
+                       dragArea.DelegateModel.itemsIndex
+                   )
 
-            MouseArea {
-                id: dragArea
-                anchors.fill: parent
-
-                property bool held: false
-
-                onPressAndHold: held = true
-                onReleased: held = false
-
-                drag.target: content
-                drag.axis: Drag.YAxis
+               }
             }
         }
     }
 
-    ListView {
-        id: view
+    DelegateModel {
+        id: visualModel
         model: PetsModel {}
         delegate: dragDelegate
-        anchors.fill: parent
+    }
 
+    ListView {
+        id: view
+        anchors.fill: parent
+        anchors.margins: 2
+
+        model: visualModel
         spacing: 4
         cacheBuffer: 40
     }
