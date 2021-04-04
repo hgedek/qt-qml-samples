@@ -100,13 +100,13 @@ Rectangle {
         property int sortOrder: orderSelector.selectedIndex
         onSortOrderChanged: items.setGroups(0, items.count, "unsorted")
 
-        function insertPosition(lessThan, item) {
+        function insertPosition(less, item) {
             var lower = 0
             var upper = items.count
 
             while (lower < upper ) {
                 var middle = Math.floor(lower + (upper-lower)/2)
-                var result = lessThan(item.model, items.get(middle).model)
+                var result = less(item.model, items.get(middle).model)
                 if (result)
                     upper = middle
                 else
