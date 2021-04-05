@@ -1,0 +1,18 @@
+<RCC>
+    <qresource prefix="/">
+        <file>main.qml</file>
+        <file>Block.qml</file>
+        <file>Button.qml</file>
+        <file>images/background.jpg</file>
+        <file>images/blueStar.png</file>
+        <file>images/blueStone.png</file>
+        <file>images/greenStar.png</file>
+        <file>images/greenStone.png</file>
+        <file>images/redStar.png</file>
+        <file>images/redStone.png</file>
+        <file>images/star.png</file>
+        <file>images/yellowStone.png</file>
+        <file>samegame.js</file>
+        <file>Dialog.qml</file>
+    </qresource>
+</RCC>
